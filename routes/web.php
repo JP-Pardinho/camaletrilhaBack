@@ -7,12 +7,10 @@ use Illuminate\Support\Facades\Route;
 use PHPUnit\Metadata\Group;
 
 Route::get('/', [PrincipalController::class, 'principal'])->name('site.index');
-
 Route::get('/sobre-nos', [SobreNosController::class, 'sobreNos'])->name('site.sobrenos');
-
 Route::get('/contato', [ContatoController::class, 'contato'])->name('site.contato');
-
 Route::get('/login', [])->name('site.login');
+Route::post('/contato/salvar', [ContatoController::class, 'salvar'])->name('site.contato.salvar');
 
 Route::prefix('/app')->group(function () {
     Route::get('/clientes', []);
@@ -20,14 +18,6 @@ Route::prefix('/app')->group(function () {
     Route::get('/produtos', []);
 });
 
-
-Route::get('rota1', function () {
-    echo 'Rota 1';
-})->name('site.rota1');
-
-Route::get('rota2', function () {
-    return redirect()->route('site.rota1');
-})->name('site.rota2');
 
 Route::fallback(function () {
     echo 'A rota acessada não existe. <a href="' . route('site.index') . '">Clique aqui</a> para ir para a página inicial.';

@@ -1,15 +1,23 @@
+@extends('layouts.app')
 
-<h3>Pricipal (view)</h3>
+@section('conteudo')
+<h3>Principal (view)</h3>
 
-<ul>
-    <li>
-        <a href="{{ route('site.index') }}">Principal</a>
+<ul class="list-group">
+    <li class="list-group-item">
+        <button type="button" class="btn btn-primary">
+            <a class="text-white text-decoration-none" href="{{ route('site.index') }}">Principal</a>
+        </button>
     </li>
-    <li>
-        <a href="{{ route('site.contato') }}">Contato</a>
+    <li class="list-group-item">
+        <button type="button" class="btn btn-secondary">
+            <a class="text-white text-decoration-none" href="{{ route('site.contato') }}">Contato</a>
+        </button>
     </li>
-    <li>
-        <a href="{{ route('site.sobrenos') }}">Sobre nós</a>
+    <li class="list-group-item">
+        <button type="button" class="btn btn-success">
+            <a class="text-white text-decoration-none" href="{{ route('site.sobrenos') }}">Sobre nós</a>
+        </button>
     </li>
 </ul>
- 
+@endsection
