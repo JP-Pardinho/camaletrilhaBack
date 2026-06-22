@@ -25,6 +25,13 @@ class MarcaController extends Controller
     public function store(StoreMarcaRequest $request): JsonResponse
     {
         $data = $request->validated();
+
+        if ($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
+            $caminho = $request->file('imagem')->store('imagens', 'public');
+
+            $data['imagem'] = $caminho;
+        }
+
         $marca = $this->marca->create($data);
 
         return response()->json($marca, Response::HTTP_CREATED);
@@ -51,7 +58,7 @@ class MarcaController extends Controller
             return response()->json('Não foi possível realizar a atualização registro não existe!', Response::HTTP_NOT_FOUND);
         }
 
-        $marca->update($request->all());
+        $marca->update($data);
 
         return response()->json($marca, Response::HTTP_OK);
     }

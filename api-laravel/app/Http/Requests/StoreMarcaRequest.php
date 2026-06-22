@@ -24,7 +24,7 @@ class StoreMarcaRequest extends FormRequest
     {
         return [
             'nome' => ['required', 'unique:marcas', 'min:3'],
-            'imagem' => 'required'
+            'imagem' => ['required', 'image']
         ];
     }
 
@@ -33,7 +33,8 @@ class StoreMarcaRequest extends FormRequest
         return [
             'nome.unique' => 'O nome da marca já existe.',
             'required' => 'O campo :attribute é obrigatório.',
-            'nome.min' => 'O nome da marca deve ter no minimo 3 caracteres.'
+            'nome.min' => 'O nome da marca deve ter no minimo 3 caracteres.',
+            'imagem.image' => 'O arquivo tem que ser uma imagem'
         ];
     }
 }
