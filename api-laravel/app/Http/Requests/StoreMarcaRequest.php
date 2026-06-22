@@ -23,7 +23,17 @@ class StoreMarcaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nome' => ['required', 'unique:marcas', 'min:3'],
+            'imagem' => 'required'
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'nome.unique' => 'O nome da marca já existe.',
+            'required' => 'O campo :attribute é obrigatório.',
+            'nome.min' => 'O nome da marca deve ter no minimo 3 caracteres.'
         ];
     }
 }

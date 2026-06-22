@@ -11,13 +11,6 @@ use Throwable;
 
 class MarcaController extends Controller
 {
-    // private Marca $marca;
-
-    // public function __construct(Marca $marca)
-    // {
-    //     $this->marca = $marca;
-    // }
-
     public function __construct(
         private Marca $marca
     ) {}
@@ -31,7 +24,8 @@ class MarcaController extends Controller
 
     public function store(StoreMarcaRequest $request): JsonResponse
     {
-        $marca = $this->marca->create($request->all());
+        $data = $request->validated();
+        $marca = $this->marca->create($data);
 
         return response()->json($marca, Response::HTTP_CREATED);
     }
@@ -49,6 +43,8 @@ class MarcaController extends Controller
 
     public function update(UpdateMarcaRequest $request, string $id): JsonResponse
     {
+        $data = $request->validated();
+
         try {
             $marca = $this->marca->findOrFail($id);
         } catch(Throwable) {
@@ -65,7 +61,7 @@ class MarcaController extends Controller
         try {
             $marca = $this->marca->findOrFail($id);
         } catch(Throwable) {
-            return response()->json('Não foi possível realizar a remoção, registro não existe!', Response::HTTP_NOT);
+            return response()->json('Não foi possível realizar a remoção, registro não existe!', Response::HTTP_NOT_FOUND);
         }
         $marca->delete();
 
